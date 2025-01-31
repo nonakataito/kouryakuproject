@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class CreateKouryakuView(CreateView):
     form_class = KouryakuPostForm
-    template_name = "post_Kouryaku.html"
+    template_name = "post_kouryaku.html"
     
     # データベースへの登録完了後のリダイレクト先
     success_url = reverse_lazy('kouryaku:post_done')
