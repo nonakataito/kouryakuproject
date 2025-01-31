@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}ゲーム攻略情報局{% endblock %}
+  {% block contents %}
+  {% include "kensaku.html" %}
+  {% include "kouryakus_title.html" %}
+  {% include "kouryakus_list.html" %}
+  {% include "pagenation.html" %}
+  {% endblock %}
+  <!-- extendsはそのHTMLまるまる持ってくる -->
+  <!-- includeは特定のところだけ持ってくる -->

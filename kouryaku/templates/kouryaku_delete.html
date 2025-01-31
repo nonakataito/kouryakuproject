@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}kouryaku Detail{% endblock %}
+
+{% block contents %}
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col offset-3">
+            <form method="POST">
+                <br>
+                <P>削除してもいいですか？</P>
+                {% csrf_token %}
+                <button class="btn btn-primary my-2"
+                                type="submit">削除</button>
+                <a href="{% url 'kouryaku:kouryaku_detail' object.pk %}"
+                    class="btn btn-socondary my-2">キャンセル</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

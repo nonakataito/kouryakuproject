@@ -1,0 +1,8 @@
+<form method="get" action="{% url 'kouryaku:search' %}" onsubmit="return validateForm()">
+    <input type="text" name="query" value="{{ request.GET.query }}" placeholder="検索キーワードを入力" class="search-input">
+
+    <!-- エラーメッセージ -->
+    <button type="submit" class="search-btn">検索</button>
+    <div id="error-message" style="color: red; display: none;">検索ワードを入力してください。</div>
+
+  </form>
