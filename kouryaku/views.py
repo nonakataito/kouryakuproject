@@ -90,21 +90,53 @@ class KouryakuDeleteView(DeleteView):
 
 # Create your views here.
 
+from django.shortcuts import render, redirect
+from .forms import SearchForm  # SearchFormをインポート
+from .models import KouryakuPost  # 投稿モデル（例）
 # views.py
+
 def search(request):
     form = SearchForm(request.GET)  # GETリクエストを使ってフォームを初期化
     posts = KouryakuPost.objects.all()  # 全ての投稿を取得
+    paginate_by = 9
+
     if form.is_valid():  # フォームが有効であれば
         query = form.cleaned_data['query']  # 入力された検索キーワードを取得
-        print(f"検索クエリ: {query}")  # デバッグ用にクエリを表示
-        posts = posts.filter(title__icontains=query)  # タイトルに部分一致する投稿をフィルタリング
-        print(f"検索結果件数: {posts.count()}")  # 結果件数を表示
+
+        # クエリが入力されていればフィルタリング
+        if query:
+            posts = posts.filter(title__icontains=query)  # タイトルに部分一致する投稿をフィルタリング
+
     else:
         # 検索ワードが入力されていない場合、リダイレクトする
         if 'query' not in request.GET or not request.GET['query'].strip():
             return redirect('kouryaku:index')  # 例: indexページにリダイレクト
-        return render(request, 'search.html', {'form': form, 'posts': posts})
 
     return render(request, 'search.html', {'form': form, 'posts': posts})
+
+
+# def search(request):
+#     form = SearchForm(request.GET)  # GETリクエストを使ってフォームを初期化
+#     posts = KouryakuPost.objects.all()  # 全ての投稿を取得
+#     if form.is_valid():  # フォームが有効であれば
+#         query = form.cleaned_data['query']  # 入力された検索キーワードを取得
+#         print(f"検索クエリ: {query}")  # デバッグ用にクエリを表示
+#         posts = posts.filter(title__icontains=query)  # タイトルに部分一致する投稿をフィルタリング
+#         print(f"検索結果件数: {posts.count()}")  # 結果件数を表示
+#     else:
+#         # 検索ワードが入力されていない場合、リダイレクトする
+#         if 'query' not in request.GET or not request.GET['query'].strip():
+#             return redirect('kouryaku:index')  # 例: indexページにリダイレクト
+#         return render(request, 'search.html', {'form': form, 'posts': posts})
+
+#     return render(request, 'search.html', {'form': form, 'posts': posts})
+
+
+
+
+
+
+
+
 
 

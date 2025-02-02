@@ -16,4 +16,9 @@ class SearchForm(forms.Form):
         required=True,  # 入力必須
         error_messages={'required': '検索ワードを入力してください。'}
     )
-  # 検索用の文字列
+
+
+from django import forms
+
+class SearchForm(forms.Form):
+    query = forms.CharField(required=False)
